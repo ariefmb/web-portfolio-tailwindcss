@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.header-fixed {
+  @apply fixed z-[9999] bg-white/25 backdrop-blur-md shadow-md;
+}
+
+.hamburger-line {
+  @apply w-[30px] h-[2px] bg-slate-800 block my-2;
+}
+
+.hamburger-active > span:nth-child(1) {
+  @apply rotate-45;
+}
+
+.hamburger-active > span:nth-child(2) {
+  @apply scale-0;
+}
+
+.hamburger-active > span:nth-child(3) {
+  @apply -rotate-45;
+}
