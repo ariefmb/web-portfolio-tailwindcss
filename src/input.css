@@ -2,12 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .bg-dark {
+    @apply bg-slate-900;
+  }
+  .bg-dark-secondary {
+    @apply bg-slate-700;
+  }
+}
+
 .header-fixed {
-  @apply fixed z-[9999] bg-white/25 backdrop-blur-md shadow-md;
+  @apply fixed z-[9999] bg-white/25 shadow-md backdrop-blur-md dark:bg-dark/25;
 }
 
 .hamburger-line {
-  @apply w-[30px] h-[2px] bg-slate-800 block my-2;
+  @apply my-2 block h-[2px] w-[30px] bg-dark dark:bg-white;
 }
 
 .hamburger-active > span:nth-child(1) {
@@ -20,4 +29,8 @@
 
 .hamburger-active > span:nth-child(3) {
   @apply -rotate-45;
+}
+
+#dark-toggle:checked ~ label div.toggle-circle {
+  @apply translate-x-5;
 }
