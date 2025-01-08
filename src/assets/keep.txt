@@ -1,0 +1,158 @@
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Header from "./components/Header";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Projects from "./pages/Projects";
+import Contact from "./pages/Contact";
+import Footer from "./components/Footer";
+import "tailwindcss/tailwind.css";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+function App() {
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("darkMode") === "true"
+  );
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    localStorage.setItem("darkMode", darkMode);
+  }, [darkMode]);
+
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
+  return (
+    <Router>
+      <div className={darkMode ? "dark bg-gray-900 text-white" : "bg-white text-gray-900"}>
+        <Header darkMode={darkMode} setDarkMode={setDarkMode} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
+  );
+}
+
+export default App;
+
+// Header.js
+import React from "react";
+import { Link } from "react-router-dom";
+
+const Header = ({ darkMode, setDarkMode }) => {
+  return (
+    <header className="p-4 flex justify-between items-center shadow-md dark:bg-gray-800">
+      <h1 className="text-lg font-bold">Arief Budiman</h1>
+      <nav>
+        <Link to="/" className="mx-2">Home</Link>
+        <Link to="/about" className="mx-2">About</Link>
+        <Link to="/projects" className="mx-2">Projects</Link>
+        <Link to="/contact" className="mx-2">Contact</Link>
+      </nav>
+      <button
+        onClick={() => setDarkMode(!darkMode)}
+        className="px-4 py-2 bg-gray-300 dark:bg-gray-700 rounded"
+      >
+        {darkMode ? "Light" : "Dark"}
+      </button>
+    </header>
+  );
+};
+
+export default Header;
+
+// Home.js
+import React from "react";
+
+const Home = () => {
+  return (
+    <section className="text-center p-10" data-aos="fade-in">
+      <h2 className="text-3xl font-bold">Hey There!</h2>
+      <h3 className="text-xl text-green-500">Call me Arief</h3>
+      <p className="mt-2">Information System Student, Certified in Data Analytics, Web Development Enthusiast</p>
+    </section>
+  );
+};
+
+export default Home;
+
+// About.js
+import React from "react";
+
+const About = () => {
+  return (
+    <section className="p-10" data-aos="fade-up">
+      <h2 className="text-3xl font-bold">Relevant Courses</h2>
+      <ul className="mt-4 space-y-2">
+        <li>Big Data, Supply Chain Management, ERP</li>
+        <li>Web Programming, Data Mining & Data Warehouse</li>
+        <li>OOP, Information System Analysis & Design</li>
+        <li>Data Structure, Database System using MySQL</li>
+        <li>Basic Programming, Database Introduction</li>
+      </ul>
+    </section>
+  );
+};
+
+export default About;
+
+// Projects.js
+import React from "react";
+
+const Projects = () => {
+  return (
+    <section className="p-10" data-aos="fade-left">
+      <h2 className="text-3xl font-bold">What I've Made</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+        <div className="shadow p-4">LayarKaca31 - Movie Website</div>
+        <div className="shadow p-4">Childfree Issue - Sentiment Analysis</div>
+        <div className="shadow p-4">Digitoin - LMS Website</div>
+        <div className="shadow p-4">Image Recognition - CNN Algorithm</div>
+      </div>
+    </section>
+  );
+};
+
+export default Projects;
+
+// Contact.js
+import React from "react";
+
+const Contact = () => {
+  return (
+    <section className="p-10 text-center" data-aos="fade-up">
+      <h2 className="text-3xl font-bold">Get in touch</h2>
+      <p className="mt-2">Connect with me on:</p>
+      <div className="flex justify-center mt-4 space-x-4">
+        <a href="#" className="text-blue-600">LinkedIn</a>
+        <a href="#" className="text-pink-500">Instagram</a>
+      </div>
+    </section>
+  );
+};
+
+export default Contact;
+
+// Footer.js
+import React from "react";
+
+const Footer = () => {
+  return (
+    <footer className="text-center p-4 bg-gray-200 dark:bg-gray-800">
+      <p>&copy; 2025 Arief Budiman. All Rights Reserved.</p>
+    </footer>
+  );
+};
+
+export default Footer;
